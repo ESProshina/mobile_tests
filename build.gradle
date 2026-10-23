@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2' // Плагин для Allure
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def selenideVersion = "7.9.1",
+    junitVersion = "5.10.2",
+    allureVersion = "2.25.0",
+    appiumVersion = "8.6.0",
+    ownerVersion = "1.0.12",
+    restAssuredVersion = "5.4.0"
+
+dependencies {
+    // Selenide и Appium
+    testImplementation "com.codeborne:selenide-appium:$selenideVersion"
+    testImplementation "io.appium:java-client:$appiumVersion"
+
+    // JUnit 5
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+
+    // Allure
+    testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
+    testImplementation "io.qameta.allure:allure-rest-assured:$allureVersion"
+
+    // Owner для работы с конфигами
+    testImplementation "org.aeonbits.owner:owner:$ownerVersion"
+
+    // RestAssured (для API-запросов к BrowserStack)
+    testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties(System.getProperties()) // Передача системных переменных в тесты
+}
+
+// Настройка задачи для генерации Allure-отчета
+allure {
+    report {
+        version.set("2.25.0")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.25.0")
+            }
+        }
+    }
+}
