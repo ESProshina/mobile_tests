@@ -16,14 +16,14 @@ public class SearchTests extends tests.TestBase {
 
     @Test
     void successfulSearchTest() {
-        // Используем стандартные ожидания Selenium для надежности
+
         WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(30));
 
         step("Проходим приветственные экраны (Onboarding)", () -> {
             // Даем приложению время на первый запуск
             sleep(3000);
 
-            // Пролистываем до 5 экранов онбординга
+
             for (int i = 0; i < 5; i++) {
                 if ($(AppiumBy.id("org.wikipedia.alpha:id/fragment_onboarding_skip_button")).exists()) {
                     $(AppiumBy.id("org.wikipedia.alpha:id/fragment_onboarding_skip_button")).click();
@@ -43,11 +43,10 @@ public class SearchTests extends tests.TestBase {
             wait.until(ExpectedConditions.presenceOfElementLocated(
                     AppiumBy.accessibilityId("Search Wikipedia"))).click();
 
-            // Вводим текст в поле
+
             wait.until(ExpectedConditions.presenceOfElementLocated(
                     AppiumBy.id("org.wikipedia.alpha:id/search_src_text"))).sendKeys("Appium");
 
-            // Даем время на загрузку результатов поиска
             sleep(5000);
         });
 
@@ -55,7 +54,7 @@ public class SearchTests extends tests.TestBase {
             // Забираем XML-код текущего экрана
             String pageSource = getWebDriver().getPageSource();
 
-            // Проверяем, что в нем присутствует искомая статья
+
             assertTrue(pageSource.contains("Appium"), "Результаты поиска не найдены в PageSource");
         });
     }

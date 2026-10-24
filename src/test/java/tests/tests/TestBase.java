@@ -34,8 +34,7 @@ public class TestBase {
             closeWebDriver();
             Attach.addVideo(sessionId);
         } catch (Throwable t) {
-            // Ловим Throwable, чтобы ошибка прикрепления видео или закрытия драйвера
-            // не ломала успешный тест
+
             System.out.println("Не удалось прикрепить артефакты после теста: " + t.getMessage());
             try {
                 closeWebDriver(); // Пытаемся закрыть драйвер еще раз на всякий случай

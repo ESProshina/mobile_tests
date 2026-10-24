@@ -10,7 +10,7 @@ repositories {
     mavenCentral()
 }
 
-// Версии зависимостей в одном месте для удобства
+
 def selenideVersion = "7.9.1"
 def junitVersion = "5.10.2"
 def allureVersion = "2.25.0"

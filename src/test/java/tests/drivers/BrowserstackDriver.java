@@ -35,13 +35,13 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         MutableCapabilities caps = new MutableCapabilities();
 
-        // Настройки платформы
+
         caps.setCapability(
                 "platformName",
                 platform.equals("ios") ? "iOS" : "Android"
         );
 
-        // Настройки Appium
+
         if (platform.equals("ios")) {
             caps.setCapability("appium:deviceName", config.iosDevice());
             caps.setCapability("appium:platformVersion", config.iosOs());
@@ -57,7 +57,7 @@ public class BrowserstackDriver implements WebDriverProvider {
         caps.setCapability("appium:noReset", false);
         caps.setCapability("appium:fullReset", true);
 
-        // Настройки BrowserStack
+
         Map<String, Object> bstackOptions = new HashMap<>();
 
         bstackOptions.put("userName", config.bsUser());
@@ -80,7 +80,7 @@ public class BrowserstackDriver implements WebDriverProvider {
                 driver = new AndroidDriver(url, caps);
             }
 
-            // Сохраняем ID сразу после создания сессии.
+
             sessionId = driver.getSessionId().toString();
 
             return driver;
